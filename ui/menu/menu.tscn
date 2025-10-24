@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://kskcb7tvrts6"]
+
+[ext_resource type="Script" uid="uid://daftibh48ak27" path="res://ui/menu/menu.gd" id="1_v6ljw"]
+[ext_resource type="PackedScene" uid="uid://b5mcki06ffau4" path="res://parallax_background.tscn" id="2_77h3e"]
+
+[node name="menu" type="CanvasLayer"]
+script = ExtResource("1_v6ljw")
+
+[node name="MenuBar" type="MenuBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="ParallaxBackground" parent="MenuBar" instance=ExtResource("2_77h3e")]
+
+[node name="Control" type="Control" parent="MenuBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -40.0
+offset_right = 100.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonPlay" type="Button" parent="MenuBar/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = -40.0
+offset_right = 100.0
+grow_horizontal = 2
+text = "Play"
+
+[node name="ButtonQuit" type="Button" parent="MenuBar/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -40.0
+offset_right = 100.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Quit
+"
+
+[connection signal="pressed" from="MenuBar/Control/ButtonPlay" to="." method="_on_button_play_pressed"]
+[connection signal="pressed" from="MenuBar/Control/ButtonQuit" to="." method="_on_button_quit_pressed"]
