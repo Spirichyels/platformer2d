@@ -428,20 +428,23 @@ sources/0 = SubResource("TileSetAtlasSource_44x8d")
 [sub_resource type="GDScript" id="GDScript_44x8d"]
 script/source = "extends Label
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	text = \"HP: \" + str($\"../../Player/Player\".HEALTH)
 "
 
 [sub_resource type="GDScript" id="GDScript_ivpvi"]
 script/source = "extends Label
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	text = \"GOLD: \" + str($\"../../Player/Player\".gold)
 "
 
 [node name="level" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+offset = Vector2(0, 200)
+scale = Vector2(0.5, 0.5)
+transform = Transform2D(0.5, 0, 0, 0.5, 0, 200)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.2, 1)
@@ -457,7 +460,7 @@ motion_scale = Vector2(0.5, 1)
 motion_mirroring = Vector2(1260, 0)
 
 [node name="BackgroundLayer1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2(632, 350)
+position = Vector2(632, 352)
 scale = Vector2(3.94375, 3.88889)
 texture = ExtResource("3_ktfr2")
 
