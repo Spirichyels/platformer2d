@@ -43,7 +43,7 @@ func _on_detector_death_body_entered(body: Node2D) -> void:
 func _on_detector_death_2_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		if(alive):
-			body.HEALTH -= 40
+			body.health -= 40
 		death()
 
 

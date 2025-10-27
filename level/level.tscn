@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://bua4jcduwk1wj"]
+[gd_scene load_steps=13 format=3 uid="uid://bua4jcduwk1wj"]
 
+[ext_resource type="PackedScene" uid="uid://43chh4te6eep" path="res://Shop/shop.tscn" id="1_0v1st"]
 [ext_resource type="PackedScene" uid="uid://b8ifxv46p6lgp" path="res://player/player.tscn" id="1_7lnir"]
 [ext_resource type="Texture2D" uid="uid://bup62n10ux20s" path="res://oak_woods_v1.0/background/background_layer_1.png" id="2_vkbyq"]
 [ext_resource type="Texture2D" uid="uid://ci8lrysynjdfb" path="res://oak_woods_v1.0/background/background_layer_2.png" id="3_ktfr2"]
@@ -429,7 +430,7 @@ sources/0 = SubResource("TileSetAtlasSource_44x8d")
 script/source = "extends Label
 
 func _process(_delta: float) -> void:
-	text = \"HP: \" + str($\"../../Player/Player\".HEALTH)
+	text = \"HP: \" + str($\"../../Player/Player\".health)
 "
 
 [sub_resource type="GDScript" id="GDScript_ivpvi"]
@@ -442,6 +443,7 @@ func _process(_delta: float) -> void:
 [node name="level" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -1
 offset = Vector2(0, 200)
 scale = Vector2(0.5, 0.5)
 transform = Transform2D(0.5, 0, 0, 0.5, 0, 200)
@@ -471,6 +473,9 @@ motion_mirroring = Vector2(1260, 0)
 position = Vector2(632, 350)
 scale = Vector2(3.94375, 3.88889)
 texture = ExtResource("4_44x8d")
+
+[node name="Shop" parent="." instance=ExtResource("1_0v1st")]
+position = Vector2(484, 511)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ivpvi")
@@ -533,5 +538,11 @@ script = ExtResource("7_ivpvi")
 [node name="Timer" type="Timer" parent="Collecibles"]
 wait_time = 3.0
 autostart = true
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+position = Vector2(484, 511)
+energy = 0.1
+blend_mode = 1
+range_layer_min = -1
 
 [connection signal="timeout" from="Collecibles/Timer" to="Collecibles" method="_on_timer_timeout"]

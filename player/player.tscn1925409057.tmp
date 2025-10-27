@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=3 uid="uid://b8ifxv46p6lgp"]
+[gd_scene load_steps=98 format=3 uid="uid://b8ifxv46p6lgp"]
 
 [ext_resource type="Texture2D" uid="uid://c4f4re5qxe2o0" path="res://oak_woods_v1.0/character/char_blue.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://dew8770bjdop4" path="res://player/player.gd" id="1_rkbax"]
@@ -26,10 +26,6 @@ region = Rect2(168, 56, 56, 56)
 [sub_resource type="AtlasTexture" id="AtlasTexture_2uvqg"]
 atlas = ExtResource("2_yw30f")
 region = Rect2(224, 56, 56, 56)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j420s"]
-atlas = ExtResource("2_yw30f")
-region = Rect2(280, 56, 56, 56)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1s1yo"]
 atlas = ExtResource("2_yw30f")
@@ -340,9 +336,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2uvqg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j420s")
 }],
 "loop": false,
 "name": &"Attack",
@@ -624,7 +617,7 @@ animations = [{
 }]
 
 [sub_resource type="Animation" id="Animation_yw30f"]
-length = 0.6
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -632,10 +625,10 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5]
+"values": [0, 1, 2, 3, 4]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -648,20 +641,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": ["Attack"]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"combo1"
-}]
 }
 
 [sub_resource type="Animation" id="Animation_qjkh3"]
@@ -689,20 +668,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": ["Attack2"]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.233333),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"combo1"
-}]
 }
 
 [sub_resource type="Animation" id="Animation_g6k8r"]
@@ -1003,9 +968,9 @@ shape = SubResource("CapsuleShape2D_kqu6x")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -13)
 sprite_frames = SubResource("SpriteFrames_oul6g")
-animation = &"Attack2"
+animation = &"Death"
 autoplay = "Idle"
-frame = 2
+frame = 11
 flip_h = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
