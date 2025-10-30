@@ -4,6 +4,8 @@ extends Node2D
 @onready var pointLight = $Lights/PointLight2D
 @onready var days_text = $HUD/DaysText
 @onready var animPlayerDayText = $HUD/AnimationPlayer
+@onready var health_bar = $HUD/HealthBar
+@onready var player = $Player/Player
 
 enum {
 	MORNING,
@@ -16,6 +18,8 @@ var state = MORNING
 var day_count : int
  
 func _ready() -> void:
+	health_bar.max_value = player.max_health
+	health_bar.value = health_bar.max_value
 	light.enabled = true
 	day_count = 1
 	day_text_fade()
@@ -61,3 +65,8 @@ func day_text_fade():
 	
 func set_day_text():
 	days_text.text = "DAY " +str(day_count)
+
+
+func _on_player_heals_changed(new_health: Variant) -> void:
+	health_bar.value = new_health
+	pass # Replace with function body.

@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+signal  heals_changed(new_health)
 enum {
 	
 	MOVE,
@@ -7,11 +7,14 @@ enum {
 	ATTACK2,
 	ATTACK3,
 	BLOCK,
-	SLIDE
+	SLIDE,
+	DAMAGE,
+	DEATH,
+	MENU
 }
 
-const SPEED = 150.0
-const FAST_SPEED = 300.0
+const SPEED = 100.0
+const FAST_SPEED = 200.0
 
 const JUMP_VELOCITY = -400.0
 @onready var anim = $AnimatedSprite2D
@@ -20,6 +23,8 @@ const JUMP_VELOCITY = -400.0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var health = 100
+var max_health = 100
+
 var gold = 0
 var state = MOVE
 var runSpeed = 1
@@ -27,7 +32,12 @@ var combo = false
 var attack_coldown = false
 var player_position
 
+func _ready() -> void:
+	Signals.connect("enemy_attack", Callable(self, "_on_damage_received"))
+	health = max_health
 
+
+	
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -51,6 +61,14 @@ func _physics_process(delta: float) -> void:
 		SLIDE:
 			slide_state()
 			pass
+		DAMAGE:
+			damage_state()
+			pass
+		DEATH:
+			death_state()
+			pass
+		MENU:
+			get_tree().change_scene_to_file("res://scn/menu/menu.tscn")
 	
 	player_position = self.position
 	Signals.emit_signal("player_position_update", player_position)
@@ -63,12 +81,7 @@ func _physics_process(delta: float) -> void:
 	if velocity.y > 0: 
 		animPlayer.play("Fall")
 		
-	if(health <=0):
-		health = 0
-		animPlayer.play("Death")
-		await animPlayer.animation_finished
-		queue_free()
-		get_tree().change_scene_to_file("res://ui/menu/menu.tscn")
+	
 	move_and_slide()
 	
 	
@@ -146,3 +159,28 @@ func attack_freeze():
 	attack_coldown = true
 	await get_tree().create_timer(0.5).timeout
 	attack_coldown = false
+	
+func _on_damage_received(enemy_damage):
+	health -= enemy_damage
+	
+	
+	if health <= 0:
+		health = 0
+		state  = DEATH
+	else:
+		state = DAMAGE
+	
+	emit_signal("heals_changed", health)
+	
+func damage_state():
+	velocity.x = 0
+	animPlayer.play("Damage")
+	await  animPlayer.animation_finished
+	state = MOVE
+func death_state():
+	velocity.x = 0
+	animPlayer.play("Death")
+	await animPlayer.animation_finished
+	#queue_free()
+	
+	state = MENU
