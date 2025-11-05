@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bua4jcduwk1wj"]
+[gd_scene load_steps=20 format=3 uid="uid://bua4jcduwk1wj"]
 
 [ext_resource type="PackedScene" uid="uid://43chh4te6eep" path="res://scn/Shop/shop.tscn" id="1_0v1st"]
 [ext_resource type="Script" uid="uid://d3vauvfltkmct" path="res://scn/level/level.gd" id="1_6gtgk"]
@@ -452,84 +452,6 @@ func _process(_delta: float) -> void:
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xii2b"]
 polygon = PackedVector2Array(-832, 748, -829, 585, 493, 586, 3206, 590, 3196, 751)
 
-[sub_resource type="Animation" id="Animation_6gjcy"]
-resource_name = "sunrise"
-length = 20.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sun:energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 20),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.95, 0.2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../HUD/DaysText:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(2, 3, 5, 6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_u4duh"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sun:energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.95]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../HUD/DaysText:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_y1mxu"]
-resource_name = "sunset"
-length = 20.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sun:energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 20),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.2, 0.95]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_u4duh"]
-_data = {
-&"RESET": SubResource("Animation_u4duh"),
-&"sunrise": SubResource("Animation_6gjcy"),
-&"sunset": SubResource("Animation_y1mxu")
-}
-
 [node name="level" type="Node2D"]
 script = ExtResource("1_6gtgk")
 
@@ -662,13 +584,6 @@ texture_progress = ExtResource("12_y1mxu")
 tint_over = Color(0.72, 0.6408, 0.504, 1)
 tint_progress = Color(1, 0.08, 0.08, 1)
 
-[node name="TimeText" type="Label" parent="HUD"]
-offset_top = 33.0
-offset_right = 40.0
-offset_bottom = 56.0
-theme_override_font_sizes/font_size = 26
-text = "30"
-
 [node name="Collecibles" type="Node" parent="."]
 script = ExtResource("7_ivpvi")
 
@@ -678,9 +593,9 @@ autostart = true
 
 [node name="Lights" type="Node2D" parent="."]
 
-[node name="Sun" type="DirectionalLight2D" parent="Lights"]
-visible = false
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Lights"]
 position = Vector2(484, 511)
+enabled = false
 energy = 0.95
 blend_mode = 1
 range_layer_min = -1
@@ -699,11 +614,6 @@ texture = ExtResource("11_xii2b")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Lights"]
 occluder = SubResource("OccluderPolygon2D_xii2b")
-
-[node name="LightAnimation" type="AnimationPlayer" parent="Lights"]
-libraries = {
-&"": SubResource("AnimationLibrary_u4duh")
-}
 
 [connection signal="heals_changed" from="Player/Player" to="." method="_on_player_heals_changed"]
 [connection signal="timeout" from="Collecibles/Timer" to="Collecibles" method="_on_timer_timeout"]

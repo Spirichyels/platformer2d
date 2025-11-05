@@ -1,11 +1,14 @@
 extends Node2D
 
-@onready var light = $Lights/DirectionalLight2D
+
 @onready var pointLight = $Lights/PointLight2D
 @onready var days_text = $HUD/DaysText
-@onready var animPlayerDayText = $HUD/AnimationPlayer
+
+@onready var ligtAnimation = $Lights/LightAnimation
 @onready var health_bar = $HUD/HealthBar
 @onready var player = $Player/Player
+
+@onready var timerText = $HUD/TimeText
 
 enum {
 	MORNING,
@@ -14,36 +17,11 @@ enum {
 	NIGHT
 }
 
-var state = MORNING
+var state = NIGHT
 var day_count : int
  
-func _ready() -> void:
-	health_bar.max_value = player.max_health
-	health_bar.value = health_bar.max_value
-	light.enabled = true
-	day_count = 1
-	day_text_fade()
-	
-func _process(delta: float) -> void:
-	pass
-
-
-func morning_state():
-	var tween = get_tree().create_tween()
-	tween.tween_property(light, "energy", 0.2, 20)
-	
-	var tween1 = get_tree().create_tween()
-	tween1.tween_property(pointLight, "energy", 0, 20)
-	pass
-func evening_state():
-	var tween = get_tree().create_tween()
-	tween.tween_property(light, "energy", 0.95, 20)
-	
-	var tween1 = get_tree().create_tween()
-	tween1.tween_property(pointLight, "energy", 1.5, 20)
-	pass
-
 func _on_day_night_timeout() -> void:
+	#print("timer все")
 	match state:
 		MORNING:
 			morning_state()
@@ -53,18 +31,63 @@ func _on_day_night_timeout() -> void:
 			pass
 	if state <3: state+=1
 	else: state = MORNING
-	day_count +=1
-	set_day_text()
-	day_text_fade()
+	#day_count +=1
+	#set_day_text()
+	#day_text_fade()
 	
 	pass # Replace with function body.
-func day_text_fade():
-	animPlayerDayText.play("day_text_fade_in")
-	await get_tree().create_timer(3).timeout
-	animPlayerDayText.play("day_text_fade_out")
+
+
+func _ready() -> void:
+	health_bar.max_value = player.max_health
+	health_bar.value = health_bar.max_value
+	#morning_state()
 	
+	
+#	light.enabled = true
+	
+	#day_text_fade()
+	
+func _process(_delta: float) -> void:
+	
+	#print(state)
+	pass
+
 func set_day_text():
 	days_text.text = "DAY " +str(day_count)
+func morning_state():
+	
+	ligtAnimation.play("sunrise")
+	#await get_tree().create_timer(3).timeout
+	
+	
+	
+	#var tween = get_tree().create_tween()
+	#tween.tween_property(light, "energy", 0.2, 20)	
+	#var tween1 = get_tree().create_tween()
+	#tween1.tween_property(pointLight, "energy", 0, 20)
+	
+	
+	
+	pass
+func evening_state():
+	ligtAnimation.play("sunset")
+	#await get_tree().create_timer(3).timeout
+	#var tween = get_tree().create_tween()
+	#tween.tween_property(light, "energy", 0.95, 20)
+	
+	#var tween1 = get_tree().create_tween()
+	#tween1.tween_property(pointLight, "energy", 1.5, 20)
+	pass
+
+
+func day_text_fade():
+	#animPlayerDayText.play("day_text_fade_in")
+	#await get_tree().create_timer(3).timeout
+	#animPlayerDayText.play("day_text_fade_out")
+	pass
+	
+
 
 
 func _on_player_heals_changed(new_health: Variant) -> void:

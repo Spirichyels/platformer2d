@@ -26,6 +26,7 @@ Signals="*res://scn/Global/signals.gd"
 
 window/size/viewport_width=1260
 window/size/viewport_height=700
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
