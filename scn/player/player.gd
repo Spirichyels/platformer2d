@@ -1,5 +1,8 @@
 extends CharacterBody2D
-signal  heals_changed(new_health)
+signal heals_changed(new_health)
+signal player_finished()
+
+
 enum {
 	
 	MOVE,
@@ -22,8 +25,8 @@ const JUMP_VELOCITY = -400.0
 
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var health = 100
-var max_health = 100
+var health = 5
+var max_health = 50
 
 var gold = 0
 var state = MOVE
@@ -37,7 +40,13 @@ var damage_current
 
 func _ready() -> void:
 	Signals.connect("enemy_attack", Callable(self, "_on_damage_received"))
-	health = max_health
+	Signals.emit_signal("player_finished")
+	
+	max_health = Global.player_max_health
+	health = Global.player_health
+	print("player hp: ", health)
+	print("global hp: ", Global.player_health)
+	
 
 
 	
@@ -193,8 +202,19 @@ func death_state():
 	
 	state = MENU
 
+func _player_on_finish():
+	print("dfgdfg")
+
 
 func _on_hit_box_area_entered(_area: Area2D) -> void:
 	Signals.emit_signal("player_attack", damage_current)
 	
+	pass # Replace with function body.
+
+
+func _on_player_finished() -> void:
+	
+	
+	Global.player_health = health
+	Global.player_max_health = max_health
 	pass # Replace with function body.

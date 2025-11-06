@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://ca2pkx0pwdawp"]
+
+[ext_resource type="Script" uid="uid://cjudvbiksjny6" path="res://scn/level/level2/level_2.gd" id="1_h0k5w"]
+[ext_resource type="PackedScene" uid="uid://b8ifxv46p6lgp" path="res://scn/player/player.tscn" id="1_nkljs"]
+[ext_resource type="PackedScene" uid="uid://bc34rqxouy4af" path="res://scn/enemy/mushroom/mushroom.tscn" id="2_tonxu"]
+[ext_resource type="PackedScene" uid="uid://1s5agpeq0fwe" path="res://scn/hud/hud.tscn" id="3_tonxu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h0k5w"]
+size = Vector2(661, 20)
+
+[node name="Level2" type="Node2D"]
+script = ExtResource("1_h0k5w")
+
+[node name="Player" parent="." instance=ExtResource("1_nkljs")]
+position = Vector2(227, 89)
+
+[node name="Mushroom" parent="." instance=ExtResource("2_tonxu")]
+position = Vector2(441, 159)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(329.5, 202)
+shape = SubResource("RectangleShape2D_h0k5w")
+
+[node name="HUD" parent="." instance=ExtResource("3_tonxu")]
+
+[connection signal="heals_changed" from="Player" to="." method="_on_player_heals_changed"]

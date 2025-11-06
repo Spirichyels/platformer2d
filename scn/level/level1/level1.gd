@@ -1,6 +1,7 @@
 extends Node2D
 
 
+
 @onready var pointLight = $Lights/PointLight2D
 @onready var days_text = $HUD/DaysText
 
@@ -39,8 +40,13 @@ func _on_day_night_timeout() -> void:
 
 
 func _ready() -> void:
+	
 	health_bar.max_value = player.max_health
 	health_bar.value = health_bar.max_value
+	
+	
+	
+	
 	#morning_state()
 	
 	
@@ -92,4 +98,14 @@ func day_text_fade():
 
 func _on_player_heals_changed(new_health: Variant) -> void:
 	health_bar.value = new_health
+	pass # Replace with function body.
+
+
+func _on_finish_body_entered(body: Node2D) -> void:
+	print("win")
+	Global.player_health = player.health
+	Global.player_max_health = player.max_health
+	
+	await get_tree().create_timer(1).timeout
+	get_tree().change_scene_to_file("res://scn/level/level2/level_2.tscn")
 	pass # Replace with function body.

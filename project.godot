@@ -21,6 +21,7 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 Signals="*res://scn/Global/signals.gd"
+Global="*res://scn/Global/global.gd"
 
 [display]
 

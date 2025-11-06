@@ -74,7 +74,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_attack_range_body_entered(_body: Node2D) -> void:
 	state = ATTACK
-	print("hello")
+	
 	pass # Replace with function body.
 
 func idle_state():
