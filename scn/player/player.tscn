@@ -1,9 +1,10 @@
-[gd_scene load_steps=103 format=3 uid="uid://b8ifxv46p6lgp"]
+[gd_scene load_steps=107 format=3 uid="uid://b8ifxv46p6lgp"]
 
 [ext_resource type="Texture2D" uid="uid://c4f4re5qxe2o0" path="res://assets/oak_woods_v1.0/character/char_blue.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://dew8770bjdop4" path="res://scn/player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://sp7phd4mxlom" path="res://assets/oak_woods_v1.0/character/char_blue_1.png" id="2_yw30f"]
 [ext_resource type="Texture2D" uid="uid://dcjgrq5opo26h" path="res://assets/oak_woods_v1.0/character/char_blue_2.png" id="3_qjkh3"]
+[ext_resource type="Texture2D" uid="uid://dcdo0w2r1qnm6" path="res://assets/ninja/ninjaSpriteSet2.png" id="5_7kq1b"]
 [ext_resource type="Texture2D" uid="uid://c2q105gdr4v7c" path="res://assets/Light/photo_2025-10-27_16-45-46.jpg" id="5_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://cudxiw8hw7a07" path="res://scn/DamageBox/damage_box.tscn" id="6_m1arm"]
 
@@ -188,6 +189,18 @@ region = Rect2(224, 0, 56, 56)
 [sub_resource type="AtlasTexture" id="AtlasTexture_boad6"]
 atlas = ExtResource("1_oul6g")
 region = Rect2(280, 0, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufis8"]
+atlas = ExtResource("5_7kq1b")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pbaik"]
+atlas = ExtResource("5_7kq1b")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8171"]
+atlas = ExtResource("5_7kq1b")
+region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oul6g"]
 atlas = ExtResource("1_oul6g")
@@ -497,6 +510,15 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_boad6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ufis8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pbaik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8171")
 }],
 "loop": true,
 "name": &"Idle",
@@ -1062,7 +1084,7 @@ shape = SubResource("CapsuleShape2D_kqu6x")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -13)
 sprite_frames = SubResource("SpriteFrames_oul6g")
-animation = &"Attack3"
+animation = &"Attack"
 autoplay = "Idle"
 flip_h = true
 
