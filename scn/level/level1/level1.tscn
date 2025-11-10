@@ -610,6 +610,5 @@ libraries = {
 }
 
 [connection signal="body_entered" from="Finish" to="." method="_on_finish_body_entered"]
-[connection signal="heals_changed" from="Player/Player" to="." method="_on_player_heals_changed"]
 [connection signal="timeout" from="Collecibles/Timer" to="Collecibles" method="_on_timer_timeout"]
 [connection signal="timeout" from="Lights/DayNight" to="." method="_on_day_night_timeout"]

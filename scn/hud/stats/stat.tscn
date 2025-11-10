@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://p1jnlyht6c5t"]
+
+[ext_resource type="Texture2D" uid="uid://6be2ryunvaqm" path="res://assets/HealtBar/Sprite-0003.png" id="1_2yru4"]
+[ext_resource type="Script" uid="uid://de7oiiqycs326" path="res://scn/hud/stats/stat.gd" id="1_c8oxs"]
+[ext_resource type="Texture2D" uid="uid://d0wl81ye3p7tj" path="res://assets/HealtBar/Sprite-0001.png" id="2_c8oxs"]
+[ext_resource type="Texture2D" uid="uid://tg71tpttke6n" path="res://assets/HealtBar/Sprite-0002.png" id="3_egney"]
+[ext_resource type="Texture2D" uid="uid://cfbuw63ikaqf3" path="res://assets/stamina/energy_bar_empty.png" id="5_pvfby"]
+[ext_resource type="Texture2D" uid="uid://cln28685qska7" path="res://assets/stamina/energy_bar_progress.png" id="6_chcgk"]
+
+[node name="Stats" type="CanvasLayer"]
+script = ExtResource("1_c8oxs")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+modulate = Color(1, 1, 1, 0.678431)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_top = -105.0
+offset_right = -4.47998
+offset_bottom = -91.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2, 2)
+value = 50.0
+texture_under = ExtResource("1_2yru4")
+texture_over = ExtResource("2_c8oxs")
+texture_progress = ExtResource("3_egney")
+tint_over = Color(0.72, 0.6408, 0.504, 1)
+tint_progress = Color(1, 0.08, 0.08, 1)
+
+[node name="Stamina" type="TextureProgressBar" parent="."]
+modulate = Color(1, 1, 1, 0.678431)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_top = -78.0
+offset_right = -4.4799805
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2, 2)
+value = 50.0
+texture_under = ExtResource("5_pvfby")
+texture_progress = ExtResource("6_chcgk")
+tint_over = Color(0.72, 0.6408, 0.504, 1)
+tint_progress = Color(1, 0.977, 0.53999996, 1)
