@@ -43,15 +43,30 @@ var damage = 20
 
 
 func _ready() -> void:
-	Signals.connect("player_position_update", Callable(self, "_on_player_position_update"))
 	
-func _on_player_position_update(new_player_pos):
-	old_player_pos = new_player_pos
+	pass
+	
+
+
 
 func damage_state():
+	
 	animPlayer.play("TakeDamage")
+	damage_anim()
 	await animPlayer.animation_finished
+	
 	state = IDLE
+	
+func damage_anim():
+	velocity.x = 0
+	
+	if direction.x < 0 :
+		velocity.x += 150
+	elif direction.x > 0:
+		velocity.x -= 150
+	var tween = get_tree().create_tween()
+	tween.parallel().tween_property(self, "velocity", Vector2.ZERO, 0.1)
+	
 
 func death_state():
 	animPlayer.play("Death")
@@ -70,7 +85,7 @@ func _physics_process(delta: float) -> void:
 		#chase_state()
 		pass
 	move_and_slide()
-	
+	old_player_pos = Global.player_position
 
 func _on_attack_range_body_entered(_body: Node2D) -> void:
 	state = ATTACK

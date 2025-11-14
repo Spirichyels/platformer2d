@@ -4,12 +4,11 @@ extends Node2D
 
 @onready var pointLight = $Lights/PointLight2D
 @onready var days_text = $HUD/DaysText
-
 @onready var ligtAnimation = $Lights/LightAnimation
-
 @onready var player = $Player/Player
-
 @onready var timerText = $HUD/TimeText
+
+var mushroom_preload = preload("res://scn/enemy/mushroom/mushroom.tscn")
 
 enum {
 	MORNING,
@@ -108,4 +107,14 @@ func _on_finish_body_entered(_body: Node2D) -> void:
 	
 	await get_tree().create_timer(1).timeout
 	get_tree().change_scene_to_file("res://scn/level/level2/level_2.tscn")
+	pass # Replace with function body.
+
+func mushroom_spawn():
+	var mushroom = mushroom_preload.instantiate()
+	mushroom.position = Vector2 (randi_range(-500, 2), 565)
+	$Mobs.add_child(mushroom)
+
+
+func _on_spawner_timeout() -> void:
+	mushroom_spawn()
 	pass # Replace with function body.

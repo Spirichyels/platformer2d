@@ -36,7 +36,7 @@ var runSpeed = 1
 
 var combo = false
 var attack_coldown = false
-var player_position
+
 var damage_basic = 10
 var damage_multiplier = 1
 var damage_current
@@ -56,7 +56,7 @@ func _physics_process(delta: float) -> void:
 	if velocity.y > 0: 
 		animPlayer.play("Fall")
 	
-	damage_current = damage_basic * damage_multiplier
+	Global.player_damage = damage_basic * damage_multiplier
 		
 	match state:
 		MOVE:
@@ -87,8 +87,7 @@ func _physics_process(delta: float) -> void:
 			get_tree().change_scene_to_file("res://scn/menu/menu.tscn")
 	
 	
-	player_position = self.position
-	Signals.emit_signal("player_position_update", player_position)
+	Global.player_position = self.position
 		
 		
 	
@@ -198,7 +197,9 @@ func _on_damage_received(enemy_damage):
 		enemy_damage /= 2
 	elif state == SLIDE:
 		enemy_damage = 0
-	else: state = DAMAGE
+	else: 
+		state = DAMAGE
+		damage_anim()
 	stats.health -= enemy_damage
 	if stats.health <= 0:
 		stats.health = 0
@@ -207,15 +208,31 @@ func _on_damage_received(enemy_damage):
 	
 	
 func damage_state():
-	velocity.x = 0
+	#velocity.x = 0
+	
 	animPlayer.play("Damage")
 	await  animPlayer.animation_finished
 	state = MOVE
+	
+	
+func damage_anim():
+	velocity.x = 0
+	self.modulate = Color(1,0,0,1)
+	if anim.flip_h == true:
+		velocity.x += 200
+	elif anim.flip_h == false:
+		velocity.x -= 200
+	var tween = get_tree().create_tween()
+	tween.parallel().tween_property(self, "velocity", Vector2.ZERO, 0.1)
+	tween.parallel().tween_property(self, "modulate", Color(1,1,1,1), 0.2)
+	
+	
+	
 func death_state():
 	velocity.x = 0
 	animPlayer.play("Death")
 	await animPlayer.animation_finished
-	#queue_free()
+	#queue_free()d
 	
 	state = MENU
 
@@ -223,10 +240,6 @@ func _player_on_finish():
 	#print("dfgdfg")
 	pass
 
-func _on_hit_box_area_entered(_area: Area2D) -> void:
-	Signals.emit_signal("player_attack", damage_current)
-	
-	pass # Replace with function body.
 
 
 func _on_player_finished() -> void:

@@ -1,15 +1,16 @@
-[gd_scene load_steps=20 format=3 uid="uid://bua4jcduwk1wj"]
+[gd_scene load_steps=21 format=3 uid="uid://bua4jcduwk1wj"]
 
 [ext_resource type="PackedScene" uid="uid://43chh4te6eep" path="res://scn/Shop/shop.tscn" id="1_0v1st"]
 [ext_resource type="Script" uid="uid://d3vauvfltkmct" path="res://scn/level/level1/level1.gd" id="1_6gtgk"]
 [ext_resource type="PackedScene" uid="uid://b8ifxv46p6lgp" path="res://scn/player/player.tscn" id="1_7lnir"]
+[ext_resource type="Script" uid="uid://l2f67l4tssec" path="res://scn/level/level1/manager.gd" id="2_n5b3h"]
 [ext_resource type="Texture2D" uid="uid://bup62n10ux20s" path="res://assets/oak_woods_v1.0/background/background_layer_1.png" id="2_vkbyq"]
 [ext_resource type="Texture2D" uid="uid://ci8lrysynjdfb" path="res://assets/oak_woods_v1.0/background/background_layer_2.png" id="3_ktfr2"]
 [ext_resource type="Texture2D" uid="uid://be0shq1l55dpn" path="res://assets/oak_woods_v1.0/background/background_layer_3.png" id="4_44x8d"]
 [ext_resource type="Texture2D" uid="uid://crmdjhgunjnun" path="res://assets/oak_woods_v1.0/oak_woods_tileset.png" id="5_ktfr2"]
 [ext_resource type="Script" uid="uid://kggdnvkayspd" path="res://scn/level/collecibles.gd" id="7_ivpvi"]
-[ext_resource type="PackedScene" uid="uid://bc34rqxouy4af" path="res://scn/enemy/mushroom/mushroom.tscn" id="8_ukoct"]
 [ext_resource type="PackedScene" uid="uid://1s5agpeq0fwe" path="res://scn/hud/hud.tscn" id="9_3bmyh"]
+[ext_resource type="PackedScene" uid="uid://dgxa7xqb4fs4c" path="res://scn/menu/Pause/pause_menu.tscn" id="10_dte0m"]
 [ext_resource type="Texture2D" uid="uid://c2q105gdr4v7c" path="res://assets/Light/photo_2025-10-27_16-45-46.jpg" id="11_xii2b"]
 [ext_resource type="PackedScene" uid="uid://guw4myoh8wmj" path="res://scn/Finish/finish.tscn" id="12_dte0m"]
 
@@ -515,6 +516,25 @@ _data = {
 [node name="level1" type="Node2D"]
 script = ExtResource("1_6gtgk")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="xPause" type="Button" parent="CanvasLayer"]
+process_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_top = 5.0
+offset_right = -4.0
+offset_bottom = 36.0
+grow_horizontal = 0
+text = "menu
+"
+
+[node name="Manager" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("2_n5b3h")
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -1
 offset = Vector2(0, 200)
@@ -560,11 +580,9 @@ position = Vector2(1212, 558)
 
 [node name="Mobs" type="Node2D" parent="."]
 
-[node name="mushroom" parent="Mobs" instance=ExtResource("8_ukoct")]
-position = Vector2(81, 543)
-
-[node name="mushroom2" parent="Mobs" instance=ExtResource("8_ukoct")]
-position = Vector2(1169, 542)
+[node name="Spawner" type="Timer" parent="Mobs"]
+wait_time = 5.0
+autostart = true
 
 [node name="Player" type="Node2D" parent="."]
 
@@ -572,6 +590,31 @@ position = Vector2(1169, 542)
 position = Vector2(706, 399)
 
 [node name="HUD" parent="." instance=ExtResource("9_3bmyh")]
+
+[node name="PauseMenu" parent="HUD" instance=ExtResource("10_dte0m")]
+process_mode = 2
+visible = false
+
+[node name="Panel" parent="HUD/PauseMenu" index="0"]
+process_mode = 2
+
+[node name="VBoxContainer" parent="HUD/PauseMenu/Panel" index="0"]
+process_mode = 2
+
+[node name="Resume" parent="HUD/PauseMenu/Panel/VBoxContainer" index="0"]
+process_mode = 2
+
+[node name="Save" parent="HUD/PauseMenu/Panel/VBoxContainer" index="1"]
+process_mode = 2
+
+[node name="Load" parent="HUD/PauseMenu/Panel/VBoxContainer" index="2"]
+process_mode = 2
+
+[node name="Quit" parent="HUD/PauseMenu/Panel/VBoxContainer" index="3"]
+process_mode = 2
+
+[node name="Label" parent="HUD/PauseMenu/Panel" index="1"]
+process_mode = 2
 
 [node name="Collecibles" type="Node" parent="."]
 script = ExtResource("7_ivpvi")
@@ -609,6 +652,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_u4duh")
 }
 
+[connection signal="pressed" from="CanvasLayer/xPause" to="Manager" method="_on_x_pause_pressed"]
 [connection signal="body_entered" from="Finish" to="." method="_on_finish_body_entered"]
+[connection signal="timeout" from="Mobs/Spawner" to="." method="_on_spawner_timeout"]
+[connection signal="pressed" from="HUD/PauseMenu/Panel/VBoxContainer/Resume" to="Manager" method="_on_resume_pressed"]
+[connection signal="pressed" from="HUD/PauseMenu/Panel/VBoxContainer/Quit" to="Manager" method="_on_quit_pressed"]
 [connection signal="timeout" from="Collecibles/Timer" to="Collecibles" method="_on_timer_timeout"]
 [connection signal="timeout" from="Lights/DayNight" to="." method="_on_day_night_timeout"]
+
+[editable path="HUD/PauseMenu"]

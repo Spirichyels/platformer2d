@@ -50,3 +50,9 @@ texture_under = ExtResource("5_pvfby")
 texture_progress = ExtResource("6_chcgk")
 tint_over = Color(0.72, 0.6408, 0.504, 1)
 tint_progress = Color(1, 0.977, 0.53999996, 1)
+
+[node name="heartsRegen" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[connection signal="timeout" from="heartsRegen" to="." method="_on_hearts_regen_timeout"]

@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://dew8770bjdop4" path="res://scn/player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://sp7phd4mxlom" path="res://assets/oak_woods_v1.0/character/char_blue_1.png" id="2_yw30f"]
 [ext_resource type="Texture2D" uid="uid://dcjgrq5opo26h" path="res://assets/oak_woods_v1.0/character/char_blue_2.png" id="3_qjkh3"]
-[ext_resource type="Texture2D" uid="uid://dcdo0w2r1qnm6" path="res://assets/ninja/ninjaSpriteSet2.png" id="5_7kq1b"]
 [ext_resource type="Texture2D" uid="uid://c2q105gdr4v7c" path="res://assets/Light/photo_2025-10-27_16-45-46.jpg" id="5_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://cudxiw8hw7a07" path="res://scn/DamageBox/damage_box.tscn" id="6_m1arm"]
 [ext_resource type="PackedScene" uid="uid://p1jnlyht6c5t" path="res://scn/hud/stats/stat.tscn" id="8_ufis8"]
@@ -167,41 +166,29 @@ region = Rect2(168, 224, 56, 56)
 atlas = ExtResource("1_oul6g")
 region = Rect2(224, 224, 56, 56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rkbax"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kq1b"]
 atlas = ExtResource("1_oul6g")
 region = Rect2(0, 0, 56, 56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g1dw6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufis8"]
 atlas = ExtResource("1_oul6g")
 region = Rect2(56, 0, 56, 56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yw30f"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pbaik"]
 atlas = ExtResource("1_oul6g")
 region = Rect2(112, 0, 56, 56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qjkh3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8171"]
 atlas = ExtResource("1_oul6g")
 region = Rect2(168, 0, 56, 56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g6k8r"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjebe"]
 atlas = ExtResource("1_oul6g")
 region = Rect2(224, 0, 56, 56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_boad6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjv32"]
 atlas = ExtResource("1_oul6g")
 region = Rect2(280, 0, 56, 56)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ufis8"]
-atlas = ExtResource("5_7kq1b")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pbaik"]
-atlas = ExtResource("5_7kq1b")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p8171"]
-atlas = ExtResource("5_7kq1b")
-region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oul6g"]
 atlas = ExtResource("1_oul6g")
@@ -495,22 +482,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rkbax")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g1dw6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yw30f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qjkh3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g6k8r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_boad6")
+"texture": SubResource("AtlasTexture_7kq1b")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ufis8")
@@ -520,6 +492,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p8171")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hjebe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjv32")
 }],
 "loop": true,
 "name": &"Idle",
@@ -1155,6 +1133,132 @@ _data = {
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qjkh3"]
 polygon = PackedVector2Array(-5, 13, 9, 13, 10, 15, -7, 15)
 
+[sub_resource type="Animation" id="Animation_ufis8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-6.5, -34)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:theme_override_colors/font_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.964706, 0.180392, 0.184314, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7kq1b"]
+resource_name = "damage_received"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-6.5, -34), Vector2(-7, -65)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:theme_override_colors/font_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.964706, 0.180392, 0.184314, 1), Color(0.964706, 0.180392, 0.184314, 1), Color(0.9647059, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pbaik"]
+resource_name = "health_received"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-6.5, -34), Vector2(-7, -65)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:theme_override_colors/font_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.47843137, 0.7490196, 0.039215688, 1), Color(0.47843137, 0.7490196, 0.039215688, 1), Color(0.9647059, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ufis8"]
+_data = {
+&"RESET": SubResource("Animation_ufis8"),
+&"damage_received": SubResource("Animation_7kq1b"),
+&"health_received": SubResource("Animation_pbaik")
+}
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_rkbax")
@@ -1166,9 +1270,9 @@ shape = SubResource("CapsuleShape2D_kqu6x")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -13)
 sprite_frames = SubResource("SpriteFrames_oul6g")
-animation = &"Block"
+animation = &"Idle"
 autoplay = "Idle"
-frame = 1
+frame = 5
 flip_h = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -1208,7 +1312,7 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="HitBox" parent="AttackDirection/DamageBox" index="1"]
-collision_layer = 0
+collision_layer = 64
 collision_mask = 32
 
 [node name="CollisionShape2D" parent="AttackDirection/DamageBox/HitBox" index="0"]
@@ -1216,8 +1320,31 @@ position = Vector2(-16, 1)
 
 [node name="Stats" parent="." instance=ExtResource("8_ufis8")]
 
+[node name="HeartsText" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.5
+offset_top = -34.0
+offset_right = 12.5
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.46032974, 0.46032974)
+theme_override_colors/font_color = Color(0.964706, 0.180392, 0.184314, 1)
+text = "20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeartsAnim" type="AnimationPlayer" parent="."]
+root_node = NodePath("../HeartsText")
+libraries = {
+&"": SubResource("AnimationLibrary_ufis8")
+}
+
 [connection signal="player_finished" from="." to="." method="_on_player_finished"]
-[connection signal="area_entered" from="AttackDirection/DamageBox/HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="no_stamina" from="Stats" to="." method="_on_stats_no_stamina"]
 
 [editable path="AttackDirection/DamageBox"]

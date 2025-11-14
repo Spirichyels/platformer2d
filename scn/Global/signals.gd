@@ -1,6 +1,5 @@
 extends Node
 
-signal player_position_update(player_position)
 
 signal enemy_attack (enemy_damage)
 
