@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcdo0w2r1qnm6"
-path="res://.godot/imported/ninjaSpriteSet2.png-658bc9770e4e8654644c67a142b1bf91.ctex"
+uid="uid://ws4o5e401tvx"
+path="res://.godot/imported/speed_button_pressed.png-61c7793c23831320ab3a05dbf9ca0c72.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ninja/ninjaSpriteSet2.png"
-dest_files=["res://.godot/imported/ninjaSpriteSet2.png-658bc9770e4e8654644c67a142b1bf91.ctex"]
+source_file="res://assets/androidUI/speed_button_pressed.png"
+dest_files=["res://.godot/imported/speed_button_pressed.png-61c7793c23831320ab3a05dbf9ca0c72.ctex"]
 
 [params]
 

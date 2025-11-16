@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://baw5fen2u6b53"]
+
+[ext_resource type="Texture2D" uid="uid://bwo3bgwp2erna" path="res://assets/particles/spotlight_6.png" id="1_viycb"]
+
+[sub_resource type="Gradient" id="Gradient_tfdv5"]
+offsets = PackedFloat32Array(0, 0.47272727, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0.3019608)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7ye6w"]
+gradient = SubResource("Gradient_tfdv5")
+
+[sub_resource type="Curve" id="Curve_tfdv5"]
+_data = [Vector2(0, 0.50561804), 0.0, 0.0, 0, 0, Vector2(0.5882354, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.011235952), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_7ye6w"]
+curve = SubResource("Curve_tfdv5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7ye6w"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(100, 100, 1)
+direction = Vector3(1, -1, 0)
+spread = 180.0
+initial_velocity_min = 0.099999994
+initial_velocity_max = 0.29999998
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_7ye6w")
+color_ramp = SubResource("GradientTexture1D_7ye6w")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.19999997
+
+[node name="Dust" type="GPUParticles2D"]
+z_index = 2
+y_sort_enabled = true
+scale = Vector2(5, 4)
+amount = 200
+texture = ExtResource("1_viycb")
+lifetime = 5.0
+process_material = SubResource("ParticleProcessMaterial_7ye6w")

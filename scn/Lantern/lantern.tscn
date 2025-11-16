@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc72rbtrjd77p"]
+
+[ext_resource type="Texture2D" uid="uid://c2q105gdr4v7c" path="res://assets/Light/photo_2025-10-27_16-45-46.jpg" id="1_upa1p"]
+[ext_resource type="Script" uid="uid://bu4pa60va2pp2" path="res://scn/Lantern/lantern.gd" id="2_mge86"]
+
+[node name="Lantern" type="PointLight2D"]
+scale = Vector2(0.115, 0.11499999)
+color = Color(0.9773336, 0.7804559, 0.48981112, 1)
+energy = 2.0
+shadow_enabled = true
+texture = ExtResource("1_upa1p")
+script = ExtResource("2_mge86")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

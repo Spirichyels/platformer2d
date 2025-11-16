@@ -1,0 +1,24 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c21wkldo30k35"]
+
+[ext_resource type="FontFile" uid="uid://c7g2h23g7j8k6" path="res://fonts/PressStart2P-Regular.ttf" id="1_utlex"]
+[ext_resource type="Texture2D" uid="uid://bhe43rq7n03e8" path="res://assets/Resources/uiborder/UI_border.png" id="2_wk8v0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wk8v0"]
+texture = ExtResource("2_wk8v0")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v8anm"]
+texture = ExtResource("2_wk8v0")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[resource]
+Button/fonts/font = ExtResource("1_utlex")
+Label/fonts/font = ExtResource("1_utlex")
+Panel/styles/panel = SubResource("StyleBoxTexture_wk8v0")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_v8anm")

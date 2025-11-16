@@ -10,20 +10,20 @@
 [node name="Stats" type="CanvasLayer"]
 script = ExtResource("1_c8oxs")
 
-[node name="HealthBar" type="TextureProgressBar" parent="."]
+[node name="heartsRegen" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 21.0
+offset_top = 16.000006
+offset_right = 66.28303
+offset_bottom = 61.283035
+scale = Vector2(3.1200004, 3.1200004)
+
+[node name="HealthBar" type="TextureProgressBar" parent="VBoxContainer"]
 modulate = Color(1, 1, 1, 0.678431)
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -47.0
-offset_top = -105.0
-offset_right = -4.47998
-offset_bottom = -91.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(2, 2)
+layout_mode = 2
 value = 50.0
 texture_under = ExtResource("1_2yru4")
 texture_over = ExtResource("2_c8oxs")
@@ -31,28 +31,22 @@ texture_progress = ExtResource("3_egney")
 tint_over = Color(0.72, 0.6408, 0.504, 1)
 tint_progress = Color(1, 0.08, 0.08, 1)
 
-[node name="Stamina" type="TextureProgressBar" parent="."]
+[node name="Stamina" type="TextureProgressBar" parent="VBoxContainer"]
 modulate = Color(1, 1, 1, 0.678431)
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -47.0
-offset_top = -78.0
-offset_right = -4.4799805
-offset_bottom = -64.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(2, 2)
+layout_mode = 2
 value = 50.0
 texture_under = ExtResource("5_pvfby")
 texture_progress = ExtResource("6_chcgk")
 tint_over = Color(0.72, 0.6408, 0.504, 1)
 tint_progress = Color(1, 0.977, 0.53999996, 1)
 
-[node name="heartsRegen" type="Timer" parent="."]
-wait_time = 4.0
-autostart = true
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = 1.0
+offset_top = 80.0
+offset_right = 48.0
+offset_bottom = 97.0
+theme_override_font_sizes/font_size = 30
+text = "Gold: 50"
 
 [connection signal="timeout" from="heartsRegen" to="." method="_on_hearts_regen_timeout"]

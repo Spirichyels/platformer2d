@@ -2,8 +2,8 @@ extends CanvasLayer
 
 signal no_stamina ()
 
-@onready var health_bar = $HealthBar
-@onready var stamina_bar = $Stamina
+@onready var health_bar = $VBoxContainer/HealthBar
+@onready var stamina_bar = $VBoxContainer/Stamina
 @onready var health_text = $"../HeartsText"
 @onready var health_anim = $"../HeartsAnim"
 

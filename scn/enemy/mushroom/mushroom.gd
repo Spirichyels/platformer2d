@@ -69,11 +69,20 @@ func damage_anim():
 	
 
 func death_state():
+	
 	animPlayer.play("Death")
 	await animPlayer.animation_finished
 	queue_free()
 	
 func recover_state():
+	animPlayer.play("Recover")
+	await animPlayer.animation_finished
+	if $AttackDirection/AttackRange.has_overlapping_bodies():
+		state = ATTACK
+	else :
+		state = IDLE
+	
+func recover_state2():
 	animPlayer.play("Recover")
 	await animPlayer.animation_finished
 	state = IDLE
@@ -115,7 +124,7 @@ func chase_state():
 	
 
 
-func _on_hit_box_area_entered(area: Area2D) -> void:
+func _on_hit_box_area_entered(_area: Area2D) -> void:
 	Signals.emit_signal("enemy_attack", damage)
 	pass # Replace with function body.
 
@@ -123,6 +132,9 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 
 
 func _on_mob_health_no_health() -> void:
+	
+	Signals.emit_signal("enemy_died", position, state)
+	
 	state = DEATH
 	pass # Replace with function body.
 

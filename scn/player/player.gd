@@ -24,12 +24,14 @@ const JUMP_VELOCITY = -400.0
 @onready var anim = $AnimatedSprite2D
 @onready var animPlayer = $AnimationPlayer
 @onready var stats = $Stats
+@onready var leafs: GPUParticles2D = $Leafs
+
 
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
-var gold = 0
+
 var state = MOVE
 var runSpeed = 1
 
@@ -255,3 +257,7 @@ func _on_stats_no_stamina() -> void:
 	recovery = false
 	
 	pass # Replace with function body.
+
+func steps_leafs ():
+	leafs.emitting = true
+	leafs.one_shot = true

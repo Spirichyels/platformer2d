@@ -1,9 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://43chh4te6eep"]
+[gd_scene load_steps=11 format=3 uid="uid://43chh4te6eep"]
 
 [ext_resource type="Texture2D" uid="uid://ccv3kmjnanogn" path="res://assets/oak_woods_v1.0/decorations/shop_anim.png" id="1_3weqf"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_qlv7h"]
-radius = 79.0253
+[ext_resource type="PackedScene" uid="uid://bc72rbtrjd77p" path="res://scn/Lantern/lantern.tscn" id="2_tk4e6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6mmxm"]
 atlas = ExtResource("1_3weqf")
@@ -55,12 +53,22 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qlv7h"]
+radius = 44.38468
+
 [node name="Shop" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -20)
+sprite_frames = SubResource("SpriteFrames_7gdb2")
+autoplay = "default"
+frame_progress = 0.237518
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qlv7h")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_7gdb2")
-autoplay = "default"
-frame_progress = 0.237518
+[node name="Lantern" parent="." instance=ExtResource("2_tk4e6")]
+position = Vector2(50.000004, 15.000002)
+
+[node name="Lantern2" parent="." instance=ExtResource("2_tk4e6")]
+position = Vector2(-47.99998, 17)

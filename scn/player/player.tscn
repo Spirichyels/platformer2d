@@ -1,12 +1,25 @@
-[gd_scene load_steps=108 format=3 uid="uid://b8ifxv46p6lgp"]
+[gd_scene load_steps=121 format=3 uid="uid://b8ifxv46p6lgp"]
 
 [ext_resource type="Texture2D" uid="uid://c4f4re5qxe2o0" path="res://assets/oak_woods_v1.0/character/char_blue.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://dew8770bjdop4" path="res://scn/player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://sp7phd4mxlom" path="res://assets/oak_woods_v1.0/character/char_blue_1.png" id="2_yw30f"]
 [ext_resource type="Texture2D" uid="uid://dcjgrq5opo26h" path="res://assets/oak_woods_v1.0/character/char_blue_2.png" id="3_qjkh3"]
-[ext_resource type="Texture2D" uid="uid://c2q105gdr4v7c" path="res://assets/Light/photo_2025-10-27_16-45-46.jpg" id="5_qjkh3"]
+[ext_resource type="PackedScene" uid="uid://bc72rbtrjd77p" path="res://scn/Lantern/lantern.tscn" id="5_ufis8"]
 [ext_resource type="PackedScene" uid="uid://cudxiw8hw7a07" path="res://scn/DamageBox/damage_box.tscn" id="6_m1arm"]
+[ext_resource type="PackedScene" uid="uid://bnoik6jev28dx" path="res://scn/Resources/resources.tscn" id="8_pbaik"]
 [ext_resource type="PackedScene" uid="uid://p1jnlyht6c5t" path="res://scn/hud/stats/stat.tscn" id="8_ufis8"]
+[ext_resource type="PackedScene" uid="uid://ra8iati3683y" path="res://scn/Leafs/leafs.tscn" id="9_pbaik"]
+[ext_resource type="PackedScene" uid="uid://baw5fen2u6b53" path="res://scn/dust/dust.tscn" id="10_p8171"]
+[ext_resource type="Texture2D" uid="uid://d221pf03f44ua" path="res://assets/androidUI/arrow_button.png" id="11_rjv32"]
+[ext_resource type="Texture2D" uid="uid://5jawxjmkneoc" path="res://assets/androidUI/arrow_button_pressed.png" id="12_wfgjt"]
+[ext_resource type="Texture2D" uid="uid://dqen0iaqpvgkq" path="res://assets/androidUI/speed_button.png" id="13_bx5ty"]
+[ext_resource type="Texture2D" uid="uid://ws4o5e401tvx" path="res://assets/androidUI/speed_button_pressed.png" id="14_pa4k0"]
+[ext_resource type="Texture2D" uid="uid://bpa4p86t1j3px" path="res://assets/androidUI/attack_button.png" id="15_76prn"]
+[ext_resource type="Texture2D" uid="uid://bfir8bl6ydx8y" path="res://assets/androidUI/attack_button_pressed.png" id="16_42dgy"]
+[ext_resource type="Texture2D" uid="uid://j00ugjienghw" path="res://assets/androidUI/block_button.png" id="17_ekghd"]
+[ext_resource type="Texture2D" uid="uid://mpshay0jl1ja" path="res://assets/androidUI/block_button_pressed.png" id="18_5nglj"]
+[ext_resource type="Texture2D" uid="uid://bcsmqffboj5ps" path="res://assets/androidUI/spell_button.png" id="19_wf5ab"]
+[ext_resource type="Texture2D" uid="uid://dmownvh7ctypw" path="res://assets/androidUI/spell_button_pressed.png" id="20_wmfl7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kqu6x"]
 
@@ -878,6 +891,18 @@ tracks/1/keys = {
 "update": 1,
 "values": ["Damage"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_hg6s5"]
 length = 1.2
@@ -904,6 +929,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": ["Death"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_8t03j"]
@@ -1043,6 +1080,23 @@ tracks/2/keys = {
 "values": [{
 "args": [],
 "method": &"stamina_consumption"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"steps_leafs"
+}, {
+"args": [],
+"method": &"steps_leafs"
 }]
 }
 
@@ -1270,7 +1324,7 @@ shape = SubResource("CapsuleShape2D_kqu6x")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -13)
 sprite_frames = SubResource("SpriteFrames_oul6g")
-animation = &"Idle"
+animation = &"Run"
 autoplay = "Idle"
 frame = 5
 flip_h = true
@@ -1290,17 +1344,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_j420s")
 }
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
-position = Vector2(0, -8)
-scale = Vector2(0.05, 0.04)
-energy = 0.5
-range_layer_min = -1
-shadow_enabled = true
-texture = ExtResource("5_qjkh3")
+[node name="Lantern" parent="." instance=ExtResource("5_ufis8")]
+position = Vector2(4, -8.000001)
+scale = Vector2(0.065000005, 0.06499999)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-visible = false
+z_index = 2
 occluder = SubResource("OccluderPolygon2D_qjkh3")
 
 [node name="AttackDirection" type="Node2D" parent="."]
@@ -1328,7 +1377,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -6.5
 offset_top = -34.0
-offset_right = 12.5
+offset_right = 25.5
 offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -1343,6 +1392,65 @@ root_node = NodePath("../HeartsText")
 libraries = {
 &"": SubResource("AnimationLibrary_ufis8")
 }
+
+[node name="Resources" parent="." instance=ExtResource("8_pbaik")]
+
+[node name="Leafs" parent="." instance=ExtResource("9_pbaik")]
+position = Vector2(2, 15)
+
+[node name="Dust" parent="." instance=ExtResource("10_p8171")]
+
+[node name="MobileControl" type="CanvasLayer" parent="."]
+
+[node name="moveLeft" type="TouchScreenButton" parent="MobileControl"]
+modulate = Color(1, 1, 1, 0.63529414)
+position = Vector2(71, 526)
+scale = Vector2(3, 3)
+texture_normal = ExtResource("11_rjv32")
+texture_pressed = ExtResource("12_wfgjt")
+passby_press = true
+action = "left"
+
+[node name="moveRight" type="TouchScreenButton" parent="MobileControl"]
+modulate = Color(1, 1, 1, 0.63529414)
+position = Vector2(353, 646)
+rotation = -3.1415925
+scale = Vector2(3, 3)
+texture_normal = ExtResource("11_rjv32")
+texture_pressed = ExtResource("12_wfgjt")
+passby_press = true
+action = "right"
+
+[node name="runButton" type="TouchScreenButton" parent="MobileControl"]
+modulate = Color(1, 1, 1, 0.63529414)
+position = Vector2(948, 522)
+scale = Vector2(2, 2)
+texture_normal = ExtResource("13_bx5ty")
+texture_pressed = ExtResource("14_pa4k0")
+action = "run"
+
+[node name="attackButton" type="TouchScreenButton" parent="MobileControl"]
+modulate = Color(1, 1, 1, 0.63529414)
+position = Vector2(1049, 471)
+scale = Vector2(4, 4)
+texture_normal = ExtResource("15_76prn")
+texture_pressed = ExtResource("16_42dgy")
+action = "attack"
+
+[node name="blockButton" type="TouchScreenButton" parent="MobileControl"]
+modulate = Color(1, 1, 1, 0.63529414)
+position = Vector2(988, 422)
+scale = Vector2(2, 2)
+texture_normal = ExtResource("17_ekghd")
+texture_pressed = ExtResource("18_5nglj")
+action = "block"
+
+[node name="spellButton" type="TouchScreenButton" parent="MobileControl"]
+modulate = Color(1, 1, 1, 0.63529414)
+position = Vector2(1099, 384)
+scale = Vector2(2, 2)
+texture_normal = ExtResource("19_wf5ab")
+texture_pressed = ExtResource("20_wmfl7")
 
 [connection signal="player_finished" from="." to="." method="_on_player_finished"]
 [connection signal="no_stamina" from="Stats" to="." method="_on_stats_no_stamina"]

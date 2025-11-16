@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bua4jcduwk1wj"]
+[gd_scene load_steps=23 format=3 uid="uid://bua4jcduwk1wj"]
 
 [ext_resource type="PackedScene" uid="uid://43chh4te6eep" path="res://scn/Shop/shop.tscn" id="1_0v1st"]
 [ext_resource type="Script" uid="uid://d3vauvfltkmct" path="res://scn/level/level1/level1.gd" id="1_6gtgk"]
@@ -8,11 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://ci8lrysynjdfb" path="res://assets/oak_woods_v1.0/background/background_layer_2.png" id="3_ktfr2"]
 [ext_resource type="Texture2D" uid="uid://be0shq1l55dpn" path="res://assets/oak_woods_v1.0/background/background_layer_3.png" id="4_44x8d"]
 [ext_resource type="Texture2D" uid="uid://crmdjhgunjnun" path="res://assets/oak_woods_v1.0/oak_woods_tileset.png" id="5_ktfr2"]
-[ext_resource type="Script" uid="uid://kggdnvkayspd" path="res://scn/level/collecibles.gd" id="7_ivpvi"]
+[ext_resource type="Texture2D" uid="uid://bsaye76pqv1en" path="res://assets/oak_woods_v1.0/decorations/lamp.png" id="7_s2qmt"]
+[ext_resource type="PackedScene" uid="uid://bc72rbtrjd77p" path="res://scn/Lantern/lantern.tscn" id="8_8hjw6"]
 [ext_resource type="PackedScene" uid="uid://1s5agpeq0fwe" path="res://scn/hud/hud.tscn" id="9_3bmyh"]
 [ext_resource type="PackedScene" uid="uid://dgxa7xqb4fs4c" path="res://scn/menu/Pause/pause_menu.tscn" id="10_dte0m"]
-[ext_resource type="Texture2D" uid="uid://c2q105gdr4v7c" path="res://assets/Light/photo_2025-10-27_16-45-46.jpg" id="11_xii2b"]
 [ext_resource type="PackedScene" uid="uid://guw4myoh8wmj" path="res://scn/Finish/finish.tscn" id="12_dte0m"]
+[ext_resource type="Script" uid="uid://psf0ajtphsmi" path="res://scn/level/level1/collectibles.gd" id="13_mi0fu"]
+[ext_resource type="PackedScene" uid="uid://bbccmvds4frlx" path="res://scn/Collectibles/Coin/coin.tscn" id="13_n5b3h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_44x8d"]
 texture = ExtResource("5_ktfr2")
@@ -516,21 +518,6 @@ _data = {
 [node name="level1" type="Node2D"]
 script = ExtResource("1_6gtgk")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="xPause" type="Button" parent="CanvasLayer"]
-process_mode = 3
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_top = 5.0
-offset_right = -4.0
-offset_bottom = 36.0
-grow_horizontal = 0
-text = "menu
-"
-
 [node name="Manager" type="Node" parent="."]
 process_mode = 3
 script = ExtResource("2_n5b3h")
@@ -567,8 +554,17 @@ position = Vector2(632, 350)
 scale = Vector2(3.94375, 3.88889)
 texture = ExtResource("4_44x8d")
 
-[node name="Shop" parent="." instance=ExtResource("1_0v1st")]
-position = Vector2(484, 511)
+[node name="Buldings" type="Node2D" parent="."]
+
+[node name="Shop" parent="Buldings" instance=ExtResource("1_0v1st")]
+position = Vector2(484, 534)
+
+[node name="Lampa" type="Sprite2D" parent="Buldings"]
+position = Vector2(792, 547)
+texture = ExtResource("7_s2qmt")
+
+[node name="Lantern" parent="Buldings/Lampa" instance=ExtResource("8_8hjw6")]
+position = Vector2(-6, -6)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ivpvi")
@@ -601,48 +597,31 @@ process_mode = 2
 [node name="VBoxContainer" parent="HUD/PauseMenu/Panel" index="0"]
 process_mode = 2
 
-[node name="Resume" parent="HUD/PauseMenu/Panel/VBoxContainer" index="0"]
+[node name="Resume" parent="HUD/PauseMenu/Panel/VBoxContainer" index="2"]
 process_mode = 2
 
-[node name="Save" parent="HUD/PauseMenu/Panel/VBoxContainer" index="1"]
+[node name="Save" parent="HUD/PauseMenu/Panel/VBoxContainer" index="3"]
 process_mode = 2
 
-[node name="Load" parent="HUD/PauseMenu/Panel/VBoxContainer" index="2"]
+[node name="Load" parent="HUD/PauseMenu/Panel/VBoxContainer" index="4"]
 process_mode = 2
 
-[node name="Quit" parent="HUD/PauseMenu/Panel/VBoxContainer" index="3"]
+[node name="Quit" parent="HUD/PauseMenu/Panel/VBoxContainer" index="5"]
 process_mode = 2
-
-[node name="Label" parent="HUD/PauseMenu/Panel" index="1"]
-process_mode = 2
-
-[node name="Collecibles" type="Node" parent="."]
-script = ExtResource("7_ivpvi")
-
-[node name="Timer" type="Timer" parent="Collecibles"]
-wait_time = 3.0
-autostart = true
 
 [node name="Lights" type="Node2D" parent="."]
 
 [node name="Sun" type="DirectionalLight2D" parent="Lights"]
-visible = false
 position = Vector2(484, 511)
 energy = 0.95
 blend_mode = 1
+range_z_min = -1
+range_z_max = 1
 range_layer_min = -1
 
 [node name="DayNight" type="Timer" parent="Lights"]
 wait_time = 20.0
 autostart = true
-
-[node name="PointLight2D" type="PointLight2D" parent="Lights"]
-position = Vector2(534, 518)
-scale = Vector2(0.3425, 0.32)
-color = Color(0.97, 0.60722, 0.4753, 1)
-energy = 2.87
-shadow_enabled = true
-texture = ExtResource("11_xii2b")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Lights"]
 occluder = SubResource("OccluderPolygon2D_xii2b")
@@ -652,12 +631,35 @@ libraries = {
 &"": SubResource("AnimationLibrary_u4duh")
 }
 
-[connection signal="pressed" from="CanvasLayer/xPause" to="Manager" method="_on_x_pause_pressed"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="xPause" type="Button" parent="CanvasLayer"]
+process_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_top = 5.0
+offset_right = -4.0
+offset_bottom = 36.0
+grow_horizontal = 0
+text = "menu
+"
+
+[node name="Collectibles" type="Node2D" parent="."]
+script = ExtResource("13_mi0fu")
+
+[node name="Coin" parent="Collectibles" instance=ExtResource("13_n5b3h")]
+position = Vector2(664, 567)
+
 [connection signal="body_entered" from="Finish" to="." method="_on_finish_body_entered"]
 [connection signal="timeout" from="Mobs/Spawner" to="." method="_on_spawner_timeout"]
 [connection signal="pressed" from="HUD/PauseMenu/Panel/VBoxContainer/Resume" to="Manager" method="_on_resume_pressed"]
+[connection signal="pressed" from="HUD/PauseMenu/Panel/VBoxContainer/Save" to="Manager" method="_on_save_pressed"]
+[connection signal="pressed" from="HUD/PauseMenu/Panel/VBoxContainer/Load" to="Manager" method="_on_load_pressed"]
 [connection signal="pressed" from="HUD/PauseMenu/Panel/VBoxContainer/Quit" to="Manager" method="_on_quit_pressed"]
-[connection signal="timeout" from="Collecibles/Timer" to="Collecibles" method="_on_timer_timeout"]
 [connection signal="timeout" from="Lights/DayNight" to="." method="_on_day_night_timeout"]
+[connection signal="pressed" from="CanvasLayer/xPause" to="Manager" method="_on_x_pause_pressed"]
 
 [editable path="HUD/PauseMenu"]
